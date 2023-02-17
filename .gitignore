@@ -1,0 +1,8 @@
+# ignore idea
+.idea
+**/*.iml
+
+# ignore maven
+target
+**/target
+**/.flattened-pom.xml
