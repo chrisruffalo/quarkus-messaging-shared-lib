@@ -24,14 +24,26 @@ for metadata on the payload and will print it out.
 INFO: payload: some payload (interception points: vanilla publish, quarkus subscribe, quarkus publish, vanilla subscribe)
 ```
 
-## Building/Use
-
-To build, `mvn clean install` is sufficient. Once built you can use the `quarkus-app` module to enter in to quarkus
-dev mode:
+Or you can build it
 ```bash
 []$ mvn clean install
-[]$ cd quarkus-app
-[]$ mvn quarkus:dev
+# or natively...
+[]$ mvn clean install -Pnative
 ```
 
-There is one resource at `/` that accepts a POST and a string body. You can also use dev mode's swagger ui to invoke it.
+And run it
+```bash
+[]$ java -jar quarkus-app/target/quarkus-app/quarkus-run.jar
+# or natively...
+[]$ ./quarkus-app/target/quarkus-messaging-shared-lib-app-1.0.0-runner
+```
+
+And then, in another terminal, make a post to it
+```bash
+[]$ curl -v -d "hello" localhost:8080/ -H "Content-type: text/plain" -H "Accept: text/plain"
+```
+
+And in the logs of your application you will see:
+```text
+2023-02-17 15:12:34,428 INFO  [org.exa.Consumer] (executor-thread-1) payload: hello (interception points: vanilla publish, quarkus subscribe, quarkus publish, vanilla subscribe)
+```
